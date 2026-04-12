@@ -103,6 +103,20 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):
 		super().__init__()
 		self._settings = loadSettings()
+		self._toolsMenu = gui.mainFrame.sysTrayIcon.toolsMenu
+		self._locationMenuItem = self._toolsMenu.Append(
+			wx.ID_ANY, "Weather Report - Set &Location...", "Set your city and coordinates for weather reports"
+		)
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self._onLocationMenu, self._locationMenuItem)
+
+	def terminate(self):
+		try:
+			self._toolsMenu.Remove(self._locationMenuItem)
+		except Exception:
+			pass
+
+	def _onLocationMenu(self, evt):
+		self._showLocationDialog()
 
 	@script(
 		description="Announce current weather conditions",
