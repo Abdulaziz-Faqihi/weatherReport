@@ -13,9 +13,9 @@ CONFIG_DIR = os.path.join(config.getUserDefaultConfigPath(), "weatherReport")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "settings.json")
 
 DEFAULT_SETTINGS = {
-	"latitude": 17.15,
-	"longitude": 42.72,
-	"city": "Jazan",
+	"latitude": None,
+	"longitude": None,
+	"city": "",
 }
 
 API_URL = "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true"
@@ -78,12 +78,14 @@ class LocationDialog(wx.Dialog):
 		self.cityCtrl = wx.TextCtrl(panel, value=str(settings.get("city", "")))
 		sizer.Add(self.cityCtrl, 0, wx.EXPAND | wx.ALL, 5)
 
+		lat = settings.get("latitude")
+		lon = settings.get("longitude")
 		sizer.Add(wx.StaticText(panel, label="Latitude:"), 0, wx.ALL, 5)
-		self.latCtrl = wx.TextCtrl(panel, value=str(settings.get("latitude", "")))
+		self.latCtrl = wx.TextCtrl(panel, value="" if lat is None else str(lat))
 		sizer.Add(self.latCtrl, 0, wx.EXPAND | wx.ALL, 5)
 
 		sizer.Add(wx.StaticText(panel, label="Longitude:"), 0, wx.ALL, 5)
-		self.lonCtrl = wx.TextCtrl(panel, value=str(settings.get("longitude", "")))
+		self.lonCtrl = wx.TextCtrl(panel, value="" if lon is None else str(lon))
 		sizer.Add(self.lonCtrl, 0, wx.EXPAND | wx.ALL, 5)
 
 		btnSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -123,6 +125,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		gesture="kb:NVDA+shift+w",
 	)
 	def script_announceWeather(self, gesture):
+		if self._settings.get("latitude") is None or self._settings.get("longitude") is None:
+			ui.message("No location set. Open NVDA Tools menu and choose Weather Report - Set Location, or press NVDA+Shift+Control+W.")
+			return
 		city = self._settings.get("city", "")
 		ui.message(f"Fetching weather for {city}, please wait..." if city else "Fetching weather, please wait...")
 		thread = threading.Thread(target=self._fetchWeather)

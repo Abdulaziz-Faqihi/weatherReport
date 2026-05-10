@@ -32,7 +32,7 @@ An NVDA add-on that announces current weather conditions for your location using
 
 ## Example Output
 
-> Jazan: Partly cloudy, 32.5 degrees Celsius, Wind 12.3 kilometers per hour, Day
+> Riyadh: Partly cloudy, 32.5 degrees Celsius, Wind 12.3 kilometers per hour, Day
 
 ## Weather Conditions
 
@@ -40,8 +40,16 @@ The add-on supports all WMO standard weather codes including clear sky, cloudy, 
 
 ## Requirements
 
-- NVDA 2021.1 or later
+- NVDA 2021.1 or later (tested up to 2026.1)
 - Internet connection
+
+## First-Time Setup
+
+You must set your location before using the addon. Either:
+- Open NVDA's Tools menu and select **Weather Report - Set Location...**, or
+- Press `NVDA + Shift + Control + W`
+
+If you press `NVDA + Shift + W` without setting a location, the addon will remind you to do so.
 
 ## License
 
