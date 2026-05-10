@@ -53,13 +53,16 @@ WMO_CODES = {
 
 
 def loadSettings():
+	settings = dict(DEFAULT_SETTINGS)
 	if os.path.isfile(CONFIG_FILE):
 		try:
 			with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-				return json.load(f)
+				loaded = json.load(f)
+			if isinstance(loaded, dict):
+				settings.update(loaded)
 		except Exception:
 			pass
-	return dict(DEFAULT_SETTINGS)
+	return settings
 
 
 def saveSettings(settings):
