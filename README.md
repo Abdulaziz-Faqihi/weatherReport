@@ -6,6 +6,8 @@ An NVDA add-on that announces current weather conditions for your location using
 
 - Get current weather with a single keyboard shortcut
 - Announces: weather condition, temperature, wind speed, and day/night status
+- Optional extra details you can toggle: feels-like temperature, humidity, UV index, visibility, and sunrise/sunset times
+- All numbers are announced as whole values (no decimals)
 - Configurable location (city name, latitude, and longitude)
 - Settings are saved and persist across NVDA restarts
 - Non-blocking: weather data is fetched in the background
@@ -15,7 +17,7 @@ An NVDA add-on that announces current weather conditions for your location using
 | Shortcut | Action |
 |---|---|
 | `NVDA + Shift + W` | Announce current weather |
-| `NVDA + Shift + Control + W` | Set your location |
+| `NVDA + Shift + Control + W` | Open settings |
 
 ## Installation
 
@@ -23,16 +25,17 @@ An NVDA add-on that announces current weather conditions for your location using
 2. Open the file, and NVDA will prompt you to install it.
 3. Restart NVDA when prompted.
 
-## Setting Your Location
+## Settings
 
-1. Press `NVDA + Shift + Control + W` to open the location dialog.
+1. Press `NVDA + Shift + Control + W` to open the settings dialog.
 2. Enter your city name (optional, used in the announcement).
 3. Enter your latitude and longitude. You can find these on [Google Maps](https://maps.google.com) by right-clicking any location.
-4. Press OK to save.
+4. Under **What to announce**, tick the extra details you want to hear: feels-like temperature, humidity, UV index, visibility, sunrise/sunset. You can also re-enable the "Fetching weather..." loading message (off by default).
+5. Press OK to save.
 
 ## Example Output
 
-> Riyadh: Partly cloudy, 32.5 degrees Celsius, Wind 12.3 kilometers per hour, Day
+> Riyadh: Partly cloudy, 33 degrees Celsius, feels like 35, wind 12 kilometers per hour, humidity 40 percent, Day
 
 ## Weather Conditions
 
@@ -46,7 +49,7 @@ The add-on supports all WMO standard weather codes including clear sky, cloudy, 
 ## First-Time Setup
 
 You must set your location before using the addon. Either:
-- Open NVDA's Tools menu and select **Weather Report - Set Location...**, or
+- Open NVDA's Tools menu and select **Weather Report - Settings...**, or
 - Press `NVDA + Shift + Control + W`
 
 If you press `NVDA + Shift + W` without setting a location, the addon will remind you to do so.
